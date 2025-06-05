@@ -2,10 +2,11 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 
-# Load data
+# Load data dari GCS
 @st.cache_data
 def load_data():
-    df = pd.read_csv("hasil_gabungan (1).csv")
+    url = "https://storage.googleapis.com/stock-csvku/hasil_gabungan.csv"
+    df = pd.read_csv(url)
     df['Last Trading Date'] = pd.to_datetime(df['Last Trading Date'])
     df['Net Foreign'] = df['Foreign Buy'] - df['Foreign Sell']
     df['VWAP'] = df['Value'] / df['Volume']
